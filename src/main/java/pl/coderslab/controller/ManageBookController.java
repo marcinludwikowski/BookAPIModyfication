@@ -3,13 +3,11 @@ package pl.coderslab.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Book;
 import pl.coderslab.service.BookService;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -45,16 +43,9 @@ public class ManageBookController {
         return "redirect:/admin/books/all";
     }
 
-//    @GetMapping("/add")
-//    public String showAddBookForm(Model model) {
-//        Book book = new Book();
-//        model.addAttribute(book);
-//        return "/books/add";
-//    }
-//
-//    @PostMapping("/add")
-//    public String processAddBookForm(Model model) {
-//        bookService.add(book);
-//        return "redirect:/books/all";
-//    }
+    @GetMapping("/show/{id}")
+    public String showBook(Model model, @PathVariable long id) {
+        model.addAttribute("book", bookService.getBook(id).orElseThrow(EntityNotFoundException::new));
+        return "books/show";
+    }
 }

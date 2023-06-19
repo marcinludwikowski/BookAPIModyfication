@@ -24,8 +24,8 @@ public class JpaBookService implements BookService {
     }
 
     @Override
-    public Optional<Book> get(Long id) {
-        return Optional.empty();
+    public Optional<Book> getBook(Long id) {
+        return bookRepository.findById(id);
     }
 
     @Override
