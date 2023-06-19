@@ -63,4 +63,10 @@ public class ManageBookController {
         bookService.update(book);
         return "redirect:/admin/books/all";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable long id) {
+        bookService.delete(id);
+        return "redirect:/admin/books/all";
+    }
 }
