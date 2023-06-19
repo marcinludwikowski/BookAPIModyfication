@@ -30,12 +30,12 @@ public class JpaBookService implements BookService {
 
     @Override
     public void add(Book book) {
-    bookRepository.save(book);
+        bookRepository.save(book);
     }
 
     @Override
     public void update(Book book) {
-
+        bookRepository.save(book);
     }
     
 

@@ -48,4 +48,19 @@ public class ManageBookController {
         model.addAttribute("book", bookService.getBook(id).orElseThrow(EntityNotFoundException::new));
         return "books/show";
     }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String showEditForm(@PathVariable long id, Model model) {
+        model.addAttribute("book", bookService.getBook(id));
+        return "books/edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editBook(@Valid Book book, BindingResult result) {
+        if (result.hasErrors()) {
+            return "books/edit";
+        }
+        bookService.update(book);
+        return "redirect:/admin/books/all";
+    }
 }
